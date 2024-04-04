@@ -1,23 +1,20 @@
 create table members
 (
-    id   bigint not null,
-    name varchar(255),
-    primary key (id)
+    id   bigint not null auto_increment primary key,
+    name varchar(255)
 );
 
 create table order_line
 (
-    id       bigint not null,
-    order_id bigint,
-    primary key (id)
+    id       bigint not null auto_increment primary key,
+    order_id bigint
 );
 
 create table orders
 (
+    id        bigint not null auto_increment primary key,
     price     integer,
-    id        bigint not null,
-    member_id bigint,
-    primary key (id)
+    member_id bigint
 );
 
 alter table order_line
