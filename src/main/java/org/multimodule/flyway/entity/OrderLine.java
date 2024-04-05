@@ -1,11 +1,8 @@
 package org.multimodule.flyway.entity;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * packageName    : org.multimodule.flyway.entity
@@ -19,20 +16,12 @@ import java.util.List;
  * 2024-04-04        AngryPig123       최초 생성
  */
 
-@Entity
-@Table(name = "order_line")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderLine {
-
-    @Id
-    @Column(name = "id")
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @Column(name = "product_name")
+@Getter
+@ToString
+@Setter(AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class OrderLine implements Serializable {
+    private OrderLineId orderLineId;
+    private OrderId orderId;
     private String productName;
-
 }

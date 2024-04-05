@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.multimodule.flyway.mapper.OrderMapper">
+
+    <resultMap id="order" type="Order">
+        
+        <id property="id" column="id" javaType="OrderId"/>
+        <result property="price" column="price"/>
+        <result property="memberId" column="memberId" javaType="MemberId"/>
+
+        <collection property="orderLines" ofType="OrderLine">
+            <id property="orderLineId" column="orderLineId" javaType="OrderLineId"/>
+            <result property="orderId" column="orderId" javaType="OrderId"/>
+            <result property="productName" column="productName"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="findOrderAll" resultMap="order">
+        SELECT o.id            as 'id',
+               o.price         as 'price',
+               o.member_id     as 'memberId',
+               ol.id           as 'orderLineId',
+               ol.order_id     as 'orderId',
+               ol.product_name as 'productName'
+        FROM orders o
+                 INNER JOIN order_line ol ON ol.order_id = o.id
+    </select>
+
+    <select id="findOrderLineAll" resultType="OrderLine">
+        SELECT id           as 'id',
+               order_id     as 'orderId',
+               product_name as 'productName'
+        FROM order_line;
+    </select>
+
+</mapper>
