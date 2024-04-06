@@ -18,13 +18,3 @@ spring:
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
-
-#logging:
-#  level:
-#    jdbc:
-#      sqlonly: off
-#      sqltiming: info
-#      resultsettable: info
-#      audit: off
-#      resultset: off
-#      connection: off
