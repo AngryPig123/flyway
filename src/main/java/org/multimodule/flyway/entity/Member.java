@@ -21,9 +21,8 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
-public class Member implements Serializable {
+public class Member {
     private Long id;
     private String name;
 }

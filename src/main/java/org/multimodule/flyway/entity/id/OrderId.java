@@ -1,4 +1,4 @@
-package org.multimodule.flyway.entity;
+package org.multimodule.flyway.entity.id;
 
 import lombok.*;
 
@@ -15,11 +15,10 @@ import lombok.*;
  */
 
 @Getter
-@ToString
 @EqualsAndHashCode
 @AllArgsConstructor
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MemberId {
+public class OrderId {
     private Long id;
 }

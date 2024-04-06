@@ -3,11 +3,13 @@ package org.multimodule.flyway.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.multimodule.flyway.entity.Order;
+import org.multimodule.flyway.entity.id.OrderId;
 import org.multimodule.flyway.entity.OrderLine;
 import org.multimodule.flyway.mapper.OrderMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,6 +38,14 @@ public class OrderController {
         List<Order> orderList = orderMapper.findOrderAll();
         log.info("orderList = {}", orderList);
         return new ResponseEntity<>(orderList, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/order/{orderId}")
+    public ResponseEntity<Order> findOrderById(
+            @PathVariable("orderId") Long orderId
+    ) {
+        Order findOrder = orderMapper.findOrderById(new OrderId(orderId));
+        return new ResponseEntity<>(findOrder, HttpStatus.OK);
     }
 
     @GetMapping(path = "/order-line")

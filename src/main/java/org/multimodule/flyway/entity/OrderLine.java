@@ -1,6 +1,8 @@
 package org.multimodule.flyway.entity;
 
 import lombok.*;
+import org.multimodule.flyway.entity.id.OrderId;
+import org.multimodule.flyway.entity.id.OrderLineId;
 
 import java.io.Serializable;
 
@@ -17,10 +19,10 @@ import java.io.Serializable;
  */
 
 @Getter
-@ToString
 @Setter(AccessLevel.PRIVATE)
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class OrderLine implements Serializable {
+public class OrderLine {
     private OrderLineId orderLineId;
     private OrderId orderId;
     private String productName;

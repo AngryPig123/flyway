@@ -2,7 +2,7 @@ package org.multimodule.flyway.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.multimodule.flyway.entity.OrderId;
+import org.multimodule.flyway.entity.id.OrderId;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

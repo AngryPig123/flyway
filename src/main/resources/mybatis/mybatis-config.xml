@@ -5,12 +5,16 @@
 <configuration>
 
     <typeAliases>
+        <!-- entity -->
         <typeAlias alias="Order" type="org.multimodule.flyway.entity.Order"/>
         <typeAlias alias="Member" type="org.multimodule.flyway.entity.Member"/>
         <typeAlias alias="OrderLine" type="org.multimodule.flyway.entity.OrderLine"/>
-        <typeAlias alias="OrderId" type="org.multimodule.flyway.entity.OrderId"/>
-        <typeAlias alias="MemberId" type="org.multimodule.flyway.entity.MemberId"/>
-        <typeAlias alias="OrderLineId" type="org.multimodule.flyway.entity.OrderLineId"/>
+
+        <!-- id -->
+        <typeAlias alias="OrderId" type="org.multimodule.flyway.entity.id.OrderId"/>
+        <typeAlias alias="MemberId" type="org.multimodule.flyway.entity.id.MemberId"/>
+        <typeAlias alias="OrderLineId" type="org.multimodule.flyway.entity.id.OrderLineId"/>
+
     </typeAliases>
 
     <typeHandlers>

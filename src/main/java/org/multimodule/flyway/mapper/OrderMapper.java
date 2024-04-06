@@ -1,7 +1,9 @@
 package org.multimodule.flyway.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.multimodule.flyway.entity.Order;
+import org.multimodule.flyway.entity.id.OrderId;
 import org.multimodule.flyway.entity.OrderLine;
 
 import java.util.List;
@@ -22,5 +24,14 @@ import java.util.List;
 public interface OrderMapper {
     List<Order> findOrderAll();
 
+    Order findOrderById(@Param("orderId") OrderId orderId);
+
     List<OrderLine> findOrderLineAll();
+
+    void saveOrder(@Param("order") Order saveOrder);
+
+    void saveOrderLine(
+            @Param("order") Order saveOrder
+    );
+
 }

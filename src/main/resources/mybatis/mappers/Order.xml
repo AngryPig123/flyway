@@ -4,20 +4,20 @@
 <mapper namespace="org.multimodule.flyway.mapper.OrderMapper">
 
     <resultMap id="order" type="Order">
-        
         <id property="id" column="id" javaType="OrderId"/>
         <result property="price" column="price"/>
-        <result property="memberId" column="memberId" javaType="MemberId"/>
-
-        <collection property="orderLines" ofType="OrderLine">
-            <id property="orderLineId" column="orderLineId" javaType="OrderLineId"/>
-            <result property="orderId" column="orderId" javaType="OrderId"/>
-            <result property="productName" column="productName"/>
-        </collection>
-
+        <association property="memberId" column="memberId" javaType="MemberId"/>
+        <collection property="orderLines" ofType="OrderLine" resultMap="orderLine"/>
     </resultMap>
 
-    <select id="findOrderAll" resultMap="order">
+    <resultMap id="orderLine" type="OrderLine">
+        <id property="orderLineId" column="orderLineId" javaType="OrderLineId"/>
+        <result property="productName" column="productName"/>
+        <association property="orderId" column="orderId" javaType="OrderId"/>
+    </resultMap>
+
+    <!-- Order -->
+    <sql id="findOrderAllSql">
         SELECT o.id            as 'id',
                o.price         as 'price',
                o.member_id     as 'memberId',
@@ -26,13 +26,35 @@
                ol.product_name as 'productName'
         FROM orders o
                  INNER JOIN order_line ol ON ol.order_id = o.id
+    </sql>
+
+    <select id="findOrderAll" resultMap="order">
+        <include refid="findOrderAllSql"/>
     </select>
 
+    <select id="findOrderById" resultMap="order">
+        <include refid="findOrderAllSql"/>
+        WHERE o.id = #{orderId.id}
+    </select>
+
+    <insert id="saveOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders(price, member_id)
+        values (#{order.price}, #{order.memberId.id})
+    </insert>
+
+    <insert id="saveOrderLine">
+        INSERT INTO order_line(order_id, product_name) VALUES
+        <foreach item="item" collection="order.orderLines" separator=",">
+            (#{order.id.id},#{item.productName})
+        </foreach>
+    </insert>
+
+    <!-- Order Line -->
     <select id="findOrderLineAll" resultType="OrderLine">
-        SELECT id           as 'id',
+        SELECT id           as 'orderLineId',
                order_id     as 'orderId',
                product_name as 'productName'
-        FROM order_line;
+        FROM order_line
     </select>
 
 </mapper>
