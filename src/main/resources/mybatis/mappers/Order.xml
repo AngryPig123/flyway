@@ -18,12 +18,12 @@
 
     <!-- Order -->
     <sql id="findOrderAllSql">
-        SELECT o.id            as 'id',
-               o.price         as 'price',
-               o.member_id     as 'memberId',
-               ol.id           as 'orderLineId',
-               ol.order_id     as 'orderId',
-               ol.product_name as 'productName'
+        SELECT o.id            as `id`,
+               o.price         as `price`,
+               o.member_id     as `memberId`,
+               ol.id           as `orderLineId`,
+               ol.order_id     as `orderId`,
+               ol.product_name as `productName`
         FROM orders o
                  INNER JOIN order_line ol ON ol.order_id = o.id
     </sql>
@@ -51,9 +51,9 @@
 
     <!-- Order Line -->
     <select id="findOrderLineAll" resultType="OrderLine">
-        SELECT id           as 'orderLineId',
-               order_id     as 'orderId',
-               product_name as 'productName'
+        SELECT id           as `orderLineId`,
+               order_id     as `orderId`,
+               product_name as `productName`
         FROM order_line
     </select>
 
