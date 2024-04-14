@@ -30,8 +30,6 @@ public interface OrderMapper {
 
     void saveOrder(@Param("order") Order saveOrder);
 
-    void saveOrderLine(
-            @Param("order") Order saveOrder
-    );
+    void saveOrderLine(@Param("order") Order saveOrder);
 
 }

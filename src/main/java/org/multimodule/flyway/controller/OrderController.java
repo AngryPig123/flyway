@@ -8,9 +8,7 @@ import org.multimodule.flyway.entity.OrderLine;
 import org.multimodule.flyway.mapper.OrderMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,6 +51,15 @@ public class OrderController {
         List<OrderLine> orderList = orderMapper.findOrderLineAll();
         log.info("orderList = {}", orderList);
         return new ResponseEntity<>(orderList, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> saveOrder(
+            @RequestBody Order order
+    ) {
+        orderMapper.saveOrder(order);
+        orderMapper.saveOrderLine(order);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
